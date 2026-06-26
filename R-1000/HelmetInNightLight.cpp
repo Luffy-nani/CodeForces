@@ -6,7 +6,7 @@ int main() {
     cin.tie(NULL);
     long long t;
     cin >> t;
-    while (t--) {
+    while (t--) {           
         
     }
     return 0;
