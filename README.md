@@ -1,2 +1,4 @@
-# CodeForces
-I want to share all the codeforces codes here
+HAHAHAHA!
+GOAL: 1800 CF RATING
+
+LESSSGOOOOOOOOOOOO!
