@@ -1,28 +1,35 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define MOD (ll)(1e9+7)
+#define MOD 1000000007LL
 
 void solve() {
     int n;
-    cin>>n;
-    vector<int>a(n);
-    vector<int>b(n);
-    for(int i=0;i<n;i++)cin>>a[i];
-    for(int i=0;i<n;i++)cin>>b[i];
+    cin >> n;
 
-    sort(a.begin(),a.end());
-    sort(b.rbegin(),b.rend());
+    vector<int> a(n);
+    vector<int> b(n);
 
-    long long ans=1;
-    for(int i=0;i<n;i++){
-        auto it=upper_bound(a.begin(),a.end(),b[i]);
-        int count=a.end()-it;
+    for (int i = 0; i < n; i++)
+        cin >> a[i];
 
-        ans=ans*max(count-i,0LL);
+    for (int i = 0; i < n; i++)
+        cin >> b[i];
+
+    sort(a.begin(), a.end());
+    sort(b.rbegin(), b.rend());
+
+    long long ans = 1;
+
+    for (int i = 0; i < n; i++) {
+        auto it = upper_bound(a.begin(), a.end(), b[i]);
+
+        int count = a.end() - it;
+
+        ans = (ans * max(count - i, 0LL)) % MOD;
     }
-    ans=ans%MOD;
-    cout<<ans<<'\n';
+
+    cout << ans << '\n';
 }
 
 int main() {
