@@ -21,18 +21,17 @@ void solve() {
     for(int i=0;i<n;i++){
         if(count<m){
             if(freq[a[i]]>0){
-                good++; if(good>=k)ans++;
+                good++;
             }
 
             count++;
         }
         else{
-
+            if(good>=k)ans++;
             if(freq[leftIndex]>0)good--;
             
             if(freq[a[i]]>0){
                 good++;
-                if(good>=k)ans++;
             }
             leftIndex++;
         }
