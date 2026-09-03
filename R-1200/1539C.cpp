@@ -24,6 +24,7 @@ void solve() {
             ans--;
             k-=numberOfStudents;
         }
+        else break;
     }
 
     cout<<ans<<'\n';

@@ -3,48 +3,24 @@ using namespace std;
 
 void solve() {
     long long n;
-    cin >> n;
+    cin>>n;
 
-    vector<long long> a(n);
-    for(int i = 0; i < n; i++)
-        cin >> a[i];
+    int m=(n*(n-1))/2;
+    vector<int>b(m);
+    for(int i=0;i<m;i++)cin>>b[i];
+    
+    sort(b.begin(),b.end());
+    int count=n-1;
+    vector<int>ans;
 
-    vector<long long> dup = a;
-    sort(dup.begin(), dup.end());
-
-    long long l = 0;
-    long long r = n - 1;
-
-    long long ldup = 0;
-    long long rdup = n - 1;
-
-    while(l < r) {
-
-        if(a[l] == dup[ldup]) {
-            l++;
-            ldup++;
-        }
-        else if(a[l] == dup[rdup]) {
-            l++;
-            rdup--;
-        }
-        else if(a[r] == dup[ldup]) {
-            r--;
-            ldup++;
-        }
-        else if(a[r] == dup[rdup]) {
-            r--;
-            rdup--;
-        }
-        else {
-            break;
-        }
+    while(ans.size()<n && count>0){
+        ans.push_back(b[count-1]);
+        count += n - ans.size() - 1;
     }
 
-    if(l >= r)
-        cout << -1 << '\n';
-    else
-        cout << l + 1 << " " << r + 1 << '\n';
+    for(int i=0;i<n;i++)cout<<ans[i]<<" ";
+
+    cout<<endl;
 }
 
 int main() {
