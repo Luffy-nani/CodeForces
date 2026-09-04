@@ -2,55 +2,56 @@
 using namespace std;
 
 void solve() {
-    int n, q;
-    cin >> n >> q;
+    long long n,q;
+    cin>>n>>q;
 
     vector<long long> a(n);
 
-    for (int i = 0; i < n; i++)
-        cin >> a[i];
+    for(int i=0;i<n;i++)
+        cin>>a[i];
 
-    // {query, original index}
-    vector<pair<long long, int>> queries(q);
+    vector<pair<long long,int>> k(q);
 
-    for (int i = 0; i < q; i++) {
-        cin >> queries[i].first;
-        queries[i].second = i;
+    for(int i=0;i<q;i++){
+        cin>>k[i].first;
+        k[i].second=i;
     }
 
-    // Process smaller queries first
-    sort(queries.begin(), queries.end());
+    sort(k.begin(),k.end());
 
     vector<long long> ans(q);
 
-    int lastIndex = 0;
-    long long height = 0;
+    int lastIndex=0;
+    long long beforeSum=0;
 
-    for (auto &[k, idx] : queries) {
+    for(auto &p:k){
 
-        // We can climb this step if a[lastIndex] <= k
-        while (lastIndex < n && a[lastIndex] <= k) {
-            height += a[lastIndex];
-            lastIndex++;
+        for(int i=lastIndex;i<n;i++){
+
+            if(p.first<a[i]){
+                lastIndex=i;
+                break;
+            }
+
+            beforeSum+=a[i];
         }
 
-        ans[idx] = height;
+        ans[p.second]=beforeSum;
     }
 
-    // Print answers in original query order
-    for (int i = 0; i < q; i++)
-        cout << ans[i] << " ";
+    for(int i=0;i<q;i++)
+        cout<<ans[i]<<" ";
 
-    cout << '\n';
+    cout<<'\n';
 }
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int t;
-    cin >> t;
+    long long t;
+    cin>>t;
 
-    while (t--)
+    while(t--)
         solve();
 }
