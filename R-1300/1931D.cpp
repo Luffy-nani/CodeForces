@@ -18,8 +18,9 @@ void solve() {
         long long remY = a[i] % y;
 
         long long findX = (x - remX) % x;
+        long long findy=(remY-y)%y;
 
-        ans += mp[{findX, remY}];
+        ans += mp[{findX, findY}];
 
         mp[{remX, remY}]++;
     }
