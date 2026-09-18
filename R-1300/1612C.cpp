@@ -5,6 +5,13 @@ void solve() {
     long long k, x;
     cin >> k >> x;
 
+    // Total emotes in the entire triangle
+    if (x > k * k) {
+        cout << 2 * k - 1 << '\n';
+        return;
+    }
+
+    // First half: 1 + 2 + ... + mid
     long long l = 1, h = k;
 
     while (l < h) {
@@ -23,14 +30,10 @@ void solve() {
         return;
     }
 
+    // We need all k elements of the increasing part
     x -= k * (k + 1) / 2;
 
-    // FIX
-    if (x <= 0) {
-        cout << k << '\n';
-        return;
-    }
-
+    // Decreasing part: k-1, k-2, ..., 1
     l = 1;
     h = k - 1;
 
