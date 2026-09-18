@@ -5,7 +5,6 @@ void solve() {
     long long k, x;
     cin >> k >> x;
 
-    // First half: 1,2,3,...,k
     long long l = 1, h = k;
 
     while (l < h) {
@@ -19,23 +18,25 @@ void solve() {
             l = mid + 1;
     }
 
-    // x can be reached in the increasing part
     if (l * (l + 1) / 2 >= x) {
         cout << l << '\n';
         return;
     }
 
-    // We need the whole increasing part
     x -= k * (k + 1) / 2;
 
-    // Now take elements from: k-1, k-2, ..., 1
+    // FIX
+    if (x <= 0) {
+        cout << k << '\n';
+        return;
+    }
+
     l = 1;
     h = k - 1;
 
     while (l < h) {
         long long mid = l + (h - l) / 2;
 
-        // sum of first 'mid' decreasing elements
         long long sum = mid * (2 * k - 1 - mid) / 2;
 
         if (sum >= x)
