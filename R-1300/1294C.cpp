@@ -5,23 +5,22 @@ void solve() {
     long long n;
     cin>>n;
 
-    unordered_set<long long>a;
+    vector<long long>factors;
 
-    for(int i=1;i*i<=n;i++){
-        if(n%i==0){
-            a.insert(i);
-            if(i!=n/i)a.insert(n/i);
+    long long temp=n;
+
+    for(int i=2;i*i<=temp;i++){
+        if(temp%i==0){
+            factors.push_back(i);
+            temp=temp/i;
         }
+
+        if(factors.size()==2)break;
     }
 
-    if(a.size()>=3){cout<<"YES"<<'\n';
-    int count = 0;
-    for (auto it = a.begin(); it != a.end() && count < 3; ++it, ++count) {
-        cout << *it << " "; // Your logic here
-    }
-    cout<<endl;
-    }
-    else cout<<"NO"<<'\n';
+    if(temp==1 || factors.size()<2 || temp==factors[0]|| temp==factors[1])cout<<"NO"<<'\n';
+    else {cout<<"YES"<<'\n'; cout << factors[0] << " " << factors[1] << " " << temp<< endl;}
+
 }
 
 int main() {
