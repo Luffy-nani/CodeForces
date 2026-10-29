@@ -2,7 +2,7 @@
 using namespace std;
 using ll = long long;
 
-auto rangeAND(vector<vector<ll>>&s,int l,int r){
+ll rangeAND(vector<vector<ll>>&st,int l,int r){
     int j=log2(r-l+1);
     return st[j][l]&st[j][r-(1<<j)+1];
 }
@@ -38,14 +38,14 @@ void solve() {
         cin>>l>>k;
         l--;
 
-        int low=1;
+        int low=l;
         int high=n-1;
 
         int ans=-1;
 
         while(low<=high){
             int mid=low+(high-low)/2;
-            if(rangeAND(s,l,mid)>=k){
+            if(rangeAND(st,l,mid)>=k){
                 ans=mid;
                 low=mid+1;
             }
