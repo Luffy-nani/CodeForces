@@ -4,7 +4,7 @@ using namespace std;
 using ll = long long;
 
 bool check(unordered_map<int,int>freq,int n,int m,int t){
-    int total=0;
+    ll total=0;
 
     for(int i=1;i<=n;i++){
         if(t<freq[i])total+=t;
@@ -24,9 +24,9 @@ void solve() {
     for(int i=0;i<m;i++)cin>>a[i];
 
     unordered_map<int,int>freq;
-    for(int i=0;i<n;i++)freq[a[i]]++;
+    for(int i=0;i<m;i++)freq[a[i]]++;
 
-    int low=1;
+    int low=0;
     int high=2*m;
 
     while(low<high){
