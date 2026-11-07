@@ -3,7 +3,7 @@ using namespace std;
 
 using ll = long long;
 
-bool check(unordered_map<int,int>freq,int n,int m,int t){
+bool check(const unordered_map<int,int>freq,int n,int m,int t){
     ll total=0;
 
     for(int i=1;i<=n;i++){
