@@ -23,7 +23,7 @@ void solve() {
         else {
             count++;
 
-            if(count == k + 1) {
+            if(r-l+1 == k + 1) {
                 ans++;
                 l++;
                 count--;
