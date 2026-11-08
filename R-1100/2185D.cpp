@@ -1,43 +1,51 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 
 using ll = long long;
 
 void solve() {
-    ll n,m,h;
-    cin>>n>>m>>h;
+    ll n, m, h;
+    cin >> n >> m >> h;
 
-    vector<ll>a(n);
-    vector<bool>reset(n,false);
-    for(int i=0;i<n;i++){
-        cin>>a[i];
+    vector<ll> a(n), temp(n);
+    vector<ll> last(n, -1);
+
+    for(int i = 0; i < n; i++) {
+        cin >> a[i];
+        temp[i] = a[i];
     }
 
-    vector<ll>temp=a;
-    
-    for(int i=0;i<m;i++){
-        ll b,c;
-        cin>>b>>c;
+    ll lastReset = -1;
 
+    for(int i = 0; i < m; i++) {
+        ll b, c;
+        cin >> b >> c;
         b--;
-        if(reset[b]){
-            a[b]=temp[b];
-            reset[b]=false;
-        }
-        a[b]+=c;
 
-        if(a[b]>h){
-            reset[b]=true;
+        if(last[b] < lastReset) {
+            a[b] = temp[b];
+        }
+
+        a[b] += c;
+
+        if(a[b] > h) {
+            lastReset = i;
+            a[b] = temp[b];
+        }
+
+        last[b] = i;
+    }
+
+    for(int i = 0; i < n; i++) {
+        if(last[i] < lastReset) {
+            cout << temp[i] << " ";
+        }
+        else {
+            cout << a[i] << " ";
         }
     }
 
-    for(int i=0;i<n;i++){
-        if(reset[i])cout<<temp[i]<<" ";
-        else cout<<a[i]<<" ";
-    }
-    cout<<endl;
-    return;
+    cout << '\n';
 }
 
 int main() {
