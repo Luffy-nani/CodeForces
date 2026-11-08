@@ -1,3 +1,4 @@
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -7,19 +8,26 @@ void solve() {
     int n, k;
     cin >> n >> k;
 
-    vector<ll> a(n);
+    vector<ll>a(n);
     for(int i = 0; i < n; i++) cin >> a[i];
 
     int l = 0;
     int ans = 0;
+    int count = 1;
 
     for(int r = 1; r < n; r++) {
         if(a[r - 1] >= 2 * a[r]) {
             l = r;
+            count = 1;
         }
+        else {
+            count++;
 
-        if(r - l + 1 >= k) {
-            ans++;
+            if(count == k + 1) {
+                ans++;
+                l++;
+                count--;
+            }
         }
     }
 
