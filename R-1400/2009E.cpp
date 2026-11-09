@@ -2,45 +2,56 @@
 using namespace std;
 using ll=long long;
 
+ll prefixSum(ll i,ll k){
+    return i*(2*k+i-1)/2;
+}
+
 void solve() {
     ll n,k;
     cin>>n>>k;
 
-    vector<ll>prefixSum(n+1,0);
-    for(int i=0;i<n;i++)prefixSum[i+1]=prefixSum[i]+k+i;
-    
-    int low=0;
-    int high=n;
-    while(low<high){
-        int mid=low+(high-low)/2;
+    ll total=prefixSum(n,k);
 
-        if(prefixSum[mid]==(prefixSum[n]-prefixSum[mid])){
+    ll low=0;
+    ll high=n;
+
+    while(low<high){
+        ll mid=low+(high-low)/2;
+
+        ll left=prefixSum(mid,k);
+        ll right=total-left;
+
+        if(left==right){
             cout<<0<<'\n';
             return;
         }
-        else if(prefixSum[mid]>(prefixSum[n]-prefixSum[mid])){
+        else if(left>right){
             high=mid;
         }
         else low=mid+1;
     }
 
-    ll ans=LLONG_MAX;
-    ans=min(ans,abs(prefixSum[low]-(prefixSum[n]-prefixSum[low])));
+    ll left=prefixSum(low,k);
+    ll right=total-left;
+
+    ll ans=abs(left-right);
 
     if(low>0){
-        ans=min(ans,abs(prefixSum[low-1]-(prefixSum[n]-prefixSum[low-1])));
+        left=prefixSum(low-1,k);
+        right=total-left;
+
+        ans=min(ans,abs(left-right));
     }
 
     cout<<ans<<'\n';
-
 }
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    long long t;
-    cin >> t;
+    ll t;
+    cin>>t;
 
     while(t--)
         solve();
